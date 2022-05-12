@@ -1,0 +1,2 @@
+defmodule Metabase do
+end
