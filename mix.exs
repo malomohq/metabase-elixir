@@ -18,6 +18,8 @@ defmodule Metabase.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:dialyxir, ">= 0.0.0", only: :dev, runtime: false}
+    ]
   end
 end
