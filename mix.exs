@@ -21,8 +21,15 @@ defmodule Metabase.MixProject do
     [
       {:hackney, "~> 1.18", optional: true},
       {:jason, "~> 1.3", optional: true},
+
+      # dev
+
       {:dialyxir, ">= 0.0.0", only: :dev, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+
+      # test
+
+      {:bypass, "~> 2.1", only: :test}
     ]
   end
 end
