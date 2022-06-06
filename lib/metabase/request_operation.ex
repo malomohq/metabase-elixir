@@ -27,7 +27,7 @@ defmodule Metabase.RequestOperation do
     |> Map.put(:scheme, opts.protocol)
     |> Map.put(:host, opts.host)
     |> Map.put(:port, opts.port)
-    |> Map.put(:path, operation.path)
+    |> Map.put(:path, opts.path <> operation.path)
     |> Map.put(:query, URI.encode_query(operation.query))
     |> URI.to_string()
   end

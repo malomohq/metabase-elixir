@@ -17,7 +17,7 @@ defmodule Metabase.HTTP.Hackneytest do
 
   describe "send/2" do
     test "returns :ok if the response was successful", %{bypass: bypass, http_opts: http_opts} do
-      Bypass.expect_once(bypass, "POST", "/endpoint", fn
+      Bypass.expect_once(bypass, "POST", "/api/endpoint", fn
         conn ->
           conn
           |> Plug.Conn.put_resp_header("content-type", "application/json")
@@ -41,7 +41,7 @@ defmodule Metabase.HTTP.Hackneytest do
       bypass: bypass,
       http_opts: http_opts
     } do
-      Bypass.expect_once(bypass, "POST", "/endpoint", fn
+      Bypass.expect_once(bypass, "POST", "/api/endpoint", fn
         conn ->
           conn
           |> Plug.Conn.put_resp_header("content-type", "application/json")
