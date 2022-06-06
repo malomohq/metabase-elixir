@@ -14,7 +14,11 @@ defmodule Metabase.Request do
             url: String.t()
           }
 
-  defstruct body: nil, headers: [], method: nil, private: %{}, url: nil
+  defstruct body: nil,
+            headers: [{"content-type", "application/json"}],
+            method: nil,
+            private: %{},
+            url: nil
 
   @doc """
   Builds a `Metabase.HTTP.Request` struct.
