@@ -43,6 +43,8 @@ request and how it should behave.
 - `:headers` - HTTP headers used when making a request
 - `:host` - Hostname used when making a request. This field is required.
 - `:json_codec` - Module used to encode and decode JSON. Defaults to `Jason`.
+- `:path` - Base path used when building the URL to send a request to. Defaults
+  to `/api`.
 - `:port` - HTTP port used when making a request
 - `:protocol` - HTTP protocol used when making a request
 - `:retry` - Module implementing a request retry strategy. Disabled when set
