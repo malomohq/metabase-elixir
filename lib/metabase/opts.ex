@@ -16,7 +16,8 @@ defmodule Metabase.Opts do
             port: pos_integer,
             protocol: String.t(),
             retry: boolean | module,
-            retry_opts: keyword
+            retry_opts: keyword,
+            session: String.t()
           }
 
   defstruct client: HTTP.Hackney,
@@ -28,7 +29,8 @@ defmodule Metabase.Opts do
             port: nil,
             protocol: "https",
             retry: false,
-            retry_opts: []
+            retry_opts: [],
+            session: nil
 
   @doc """
   Builds a `Metabase.Opts` struct.
