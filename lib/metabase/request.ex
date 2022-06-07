@@ -14,11 +14,7 @@ defmodule Metabase.Request do
             url: String.t()
           }
 
-  defstruct body: nil,
-            headers: [{"content-type", "application/json"}],
-            method: nil,
-            private: %{},
-            url: nil
+  defstruct body: nil, headers: [], method: nil, private: %{}, url: nil
 
   @doc """
   Builds a `Metabase.HTTP.Request` struct.
@@ -35,5 +31,34 @@ defmodule Metabase.Request do
     |> Map.put(:headers, headers)
     |> Map.put(:method, method)
     |> Map.put(:url, url)
+    |> put_header("content-type", "application/json")
+    |> put_session(opts.session)
+  end
+
+  @doc """
+  Adds a new request header if not present. Otherwise, replaces the previous
+  value.
+  """
+  @spec put_header(t, String.t(), String.t()) :: t
+  def put_header(request, key, value) do
+    headers =
+      request.headers
+      |> Enum.into(%{})
+      |> Map.put(key, value)
+      |> Enum.into([])
+
+    %{request | headers: headers}
+  end
+
+  @doc """
+  Adds the Metabase session header if provided.
+  """
+  @spec put_session(t, String.t()) :: t
+  def put_session(request, nil) do
+    request
+  end
+
+  def put_session(request, session_id) do
+    put_header(request, "x-metabase-session", session_id)
   end
 end
