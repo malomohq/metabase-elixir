@@ -40,7 +40,7 @@ defmodule Metabase do
 
   """
 
-  alias Metabase.{HTTP, Opts, Request, Response}
+  alias Metabase.{HTTP, Opts, Request, RequestOperation, Response}
 
   @type headers_t ::
           [{String.t(), String.t()}]
