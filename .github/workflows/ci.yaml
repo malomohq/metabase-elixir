@@ -1,0 +1,164 @@
+name: ci
+
+on: push
+
+permissions:
+    contents: read
+
+jobs:
+    cache-key:
+        outputs:
+            cache-key: ${{ steps.cache-key.outputs.cache-key }}
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Build cache key
+
+              run: |
+                  elixir="${{ matrix.elixir }}"
+
+                  erlang="${{ matrix.otp }}"
+
+                  echo "$elixir+$erlang" > CACHEKEY
+
+            - id: cache-key
+
+              name: Compute cache key
+
+              run: |
+                  cacheKey=${{ hashFiles('mix.lock', 'CACHEKEY') }}
+
+                  echo "::set-output name=cache-key::$cacheKey"
+
+        strategy:
+            matrix:
+                elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                otp: [23.x, 24.x, 25.x]
+
+    dialyzer:
+        needs: [cache-key]
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v2
+
+              with:
+                  key: ${{ github.job }}-${{ needs.cache-key.outputs.cache-key }}
+
+                  path: |
+                      _build
+                      deps
+
+            - uses: erlef/setup-elixir@v1
+
+              with:
+                  elixir-version: ${{ matrix.elixir }}
+
+                  otp-version: ${{ matrix.otp }}
+
+            - name: Download dependencies
+
+              run: mix deps.get
+
+            - name: Compile library
+
+              run: mix compile --warnings-as-errors
+
+            - name: Run dialyzer
+
+              run: mix dialyzer
+
+        strategy:
+            matrix:
+                elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                otp: [23.x, 24.x, 25.x]
+
+    format:
+        needs: [cache-key]
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v2
+
+              with:
+                  key: ${{ github.job }}-${{ needs.cache-key.outputs.cache-key }}
+
+                  path: |
+                      _build
+                      deps
+
+            - uses: erlef/setup-elixir@v1
+
+              with:
+                  elixir-version: ${{ matrix.elixir }}
+
+                  otp-version: ${{ matrix.otp }}
+
+            - name: Download dependencies
+
+              run: mix deps.get
+
+            - name: Compile library
+
+              run: mix compile --warnings-as-errors
+
+            - name: Verify code format
+
+              run: mix format --check-formatted
+
+        strategy:
+            matrix:
+                elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                otp: [23.x, 24.x, 25.x]
+
+    test:
+        needs: [cache-key]
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - uses: actions/cache@v2
+
+              with:
+                  key: ${{ github.job }}-${{ needs.cache-key.outputs.cache-key }}
+
+                  path: |
+                      _build
+                      deps
+
+            - uses: erlef/setup-elixir@v1
+
+              with:
+                  elixir-version: ${{ matrix.elixir }}
+
+                  otp-version: ${{ matrix.otp }}
+
+            - name: Download dependencies
+
+              run: mix deps.get
+
+            - name: Compile library
+
+              run: MIX_ENV=test mix compile --warnings-as-errors
+
+            - name: Run tests
+
+              run: mix test
+
+        strategy:
+            matrix:
+                elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                otp: [23.x, 24.x, 25.x]
