@@ -8,7 +8,8 @@ defmodule Metabase.MixProject do
       dialyzer: [plt_add_apps: [:hackney]],
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -33,5 +34,17 @@ defmodule Metabase.MixProject do
 
       {:bypass, "~> 2.1", only: :test}
     ]
+  end
+
+  defp package do
+    %{
+      description: "Elixir client for the Metabase API",
+      maintainers: ["Anthony Smith"],
+      licenses: ["MIT"],
+      links: %{
+        GitHub: "https://github.com/malomohq/metabase/elixir",
+        "Made by Malomo - Post-purchase experiences that customers love": "https://gomalomo.com"
+      }
+    }
   end
 end
