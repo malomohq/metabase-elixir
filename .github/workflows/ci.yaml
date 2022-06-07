@@ -42,6 +42,11 @@ jobs:
             matrix:
                 elixir: [1.11.x, 1.12.x, 1.13.x]
 
+                exclude:
+                    - elixir: 1.11.x
+
+                    - otp: 25.x
+
                 otp: [23.x, 24.x, 25.x]
 
     dialyzer:
@@ -83,6 +88,11 @@ jobs:
         strategy:
             matrix:
                 elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                exclude:
+                    - elixir: 1.11.x
+
+                    - otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
 
@@ -126,6 +136,11 @@ jobs:
             matrix:
                 elixir: [1.11.x, 1.12.x, 1.13.x]
 
+                exclude:
+                    - elixir: 1.11.x
+
+                    - otp: 25.x
+
                 otp: [23.x, 24.x, 25.x]
 
     test:
@@ -167,5 +182,10 @@ jobs:
         strategy:
             matrix:
                 elixir: [1.11.x, 1.12.x, 1.13.x]
+
+                exclude:
+                    - elixir: 1.11.x
+
+                    - otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
