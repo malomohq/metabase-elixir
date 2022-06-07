@@ -21,6 +21,7 @@ defmodule Metabase.MixProject do
     [
       {:hackney, "~> 1.18", optional: true},
       {:jason, "~> 1.3", optional: true},
+      {:joken, "~> 2.4"},
 
       # dev
 
