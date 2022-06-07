@@ -39,7 +39,7 @@ defmodule Metabase.Response do
   defp do_decode(response, opts) do
     content_type = HTTP.Response.get_header(response, "content-type")
 
-    if content_type == "application/json" do
+    if content_type && content_type =~ "application/json" do
       opts.json_codec.decode!(response.body)
     else
       response.body

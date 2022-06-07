@@ -23,6 +23,44 @@ defmodule Metabase.ResponseTest do
       assert expected == Response.new(response, opts)
     end
 
+    test "decodes body when content-type contains more than just the MIME type" do
+      headers = [{"content-type", "application/json;charset=utf-8"}]
+      status_code = 200
+
+      response = %HTTP.Response{}
+      response = Map.put(response, :body, "{\"ok\": true}")
+      response = Map.put(response, :headers, headers)
+      response = Map.put(response, :status_code, status_code)
+
+      opts = Opts.new([])
+
+      expected = %Response{}
+      expected = Map.put(expected, :body, %{"ok" => true})
+      expected = Map.put(expected, :headers, headers)
+      expected = Map.put(expected, :status_code, status_code)
+
+      assert expected == Response.new(response, opts)
+    end
+
+    test "decodes body if content-type key is goobly cased" do
+      headers = [{"CoNtEnT-tYpE", "application/json"}]
+      status_code = 200
+
+      response = %HTTP.Response{}
+      response = Map.put(response, :body, "{\"ok\": true}")
+      response = Map.put(response, :headers, headers)
+      response = Map.put(response, :status_code, status_code)
+
+      opts = Opts.new([])
+
+      expected = %Response{}
+      expected = Map.put(expected, :body, %{"ok" => true})
+      expected = Map.put(expected, :headers, headers)
+      expected = Map.put(expected, :status_code, status_code)
+
+      assert expected == Response.new(response, opts)
+    end
+
     test "does not decode body for an unsupported content-type" do
       body = "nope"
       headers = [{"content-type", "text/plain"}]

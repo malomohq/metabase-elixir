@@ -28,8 +28,12 @@ defmodule Metabase.HTTP.Response do
   @spec get_header(t, String.t()) :: String.t()
   def get_header(response, header) do
     Enum.find_value(response.headers, fn
-      {^header, value} ->
-        value
+      {key, value} ->
+        if header == String.downcase(key) do
+          value
+        else
+          nil
+        end
 
       _otherwise ->
         nil
