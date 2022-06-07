@@ -7,6 +7,8 @@ defmodule Metabase.RequestOperation do
   expected by an endpoint.
   """
 
+  alias Metabase.{HTTP}
+
   @type t ::
           %__MODULE__{
             body: keyword,

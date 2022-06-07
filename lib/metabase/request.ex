@@ -3,7 +3,7 @@ defmodule Metabase.Request do
   HTTP request sent to an endpoint.
   """
 
-  alias Metabase.{RequestOperation}
+  alias Metabase.{HTTP, RequestOperation}
 
   @type t ::
           %__MODULE__{
