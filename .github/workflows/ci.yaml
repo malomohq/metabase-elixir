@@ -45,7 +45,7 @@ jobs:
                 exclude:
                     - elixir: 1.11.x
 
-                    - otp: 25.x
+                      otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
 
@@ -92,7 +92,7 @@ jobs:
                 exclude:
                     - elixir: 1.11.x
 
-                    - otp: 25.x
+                      otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
 
@@ -139,7 +139,7 @@ jobs:
                 exclude:
                     - elixir: 1.11.x
 
-                    - otp: 25.x
+                      otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
 
@@ -186,6 +186,6 @@ jobs:
                 exclude:
                     - elixir: 1.11.x
 
-                    - otp: 25.x
+                      otp: 25.x
 
                 otp: [23.x, 24.x, 25.x]
