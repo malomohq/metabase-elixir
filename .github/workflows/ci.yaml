@@ -132,8 +132,6 @@ jobs:
 
               run: mix deps.get
 
-            - name:
-
             - name: Compile library
 
               run: mix compile --warnings-as-errors
