@@ -13,6 +13,13 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - uses: erlef/setup-beam@v1
+
+              with:
+                  elixir-version: ${{ matrix.elixir }}
+
+                  otp-version: ${{ matrix.otp }}
+
             - name: Build cache key
 
               run: |
@@ -54,7 +61,7 @@ jobs:
                       _build
                       deps
 
-            - uses: erlef/setup-elixir@v1
+            - uses: erlef/setup-beam@v1
 
               with:
                   elixir-version: ${{ matrix.elixir }}
@@ -96,7 +103,7 @@ jobs:
                       _build
                       deps
 
-            - uses: erlef/setup-elixir@v1
+            - uses: erlef/setup-beam@v1
 
               with:
                   elixir-version: ${{ matrix.elixir }}
@@ -138,7 +145,7 @@ jobs:
                       _build
                       deps
 
-            - uses: erlef/setup-elixir@v1
+            - uses: erlef/setup-beam@v1
 
               with:
                   elixir-version: ${{ matrix.elixir }}
