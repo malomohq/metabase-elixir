@@ -4,7 +4,7 @@ defmodule Metabase.MixProject do
   def project do
     [
       app: :metabase,
-      version: "0.0.0",
+      version: "0.1.0",
       dialyzer: [plt_add_apps: [:hackney]],
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
