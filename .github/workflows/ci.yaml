@@ -47,6 +47,10 @@ jobs:
 
                       otp: 25.x
 
+                    - elixir: 1.12.x
+
+                      otp: 25.x
+
                 otp: [23.x, 24.x, 25.x]
 
     dialyzer:
@@ -94,6 +98,10 @@ jobs:
 
                       otp: 25.x
 
+                    - elixir: 1.12.x
+
+                      otp: 25.x
+
                 otp: [23.x, 24.x, 25.x]
 
     format:
@@ -124,6 +132,8 @@ jobs:
 
               run: mix deps.get
 
+            - name:
+
             - name: Compile library
 
               run: mix compile --warnings-as-errors
@@ -138,6 +148,10 @@ jobs:
 
                 exclude:
                     - elixir: 1.11.x
+
+                      otp: 25.x
+
+                    - elixir: 1.12.x
 
                       otp: 25.x
 
@@ -185,6 +199,10 @@ jobs:
 
                 exclude:
                     - elixir: 1.11.x
+
+                      otp: 25.x
+
+                    - elixir: 1.12.x
 
                       otp: 25.x
 
