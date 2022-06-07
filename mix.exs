@@ -5,7 +5,7 @@ defmodule Metabase.MixProject do
     [
       app: :metabase,
       version: "0.0.0",
-      elixir: "~> 1.13",
+      elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
