@@ -42,8 +42,8 @@ defmodule Metabase.Embed do
   def dashboard(dashboard_id, params, opts) do
     token =
       Map.new()
-      |> Map.put(:resource, %{dashboard: dashboard_id})
-      |> Map.put(:params, params)
+      |> Map.put("resource", %{"dashboard" => dashboard_id})
+      |> Map.put("params", params)
       |> token(opts)
 
     "/embed/dashboard/" <> token <> url_query(opts)
@@ -66,7 +66,7 @@ defmodule Metabase.Embed do
   def token(claims, opts) do
     verify_opts!(opts)
 
-    claims = Map.put(claims, :exp, exp(opts))
+    claims = Map.put(claims, "exp", exp(opts))
 
     Joken.generate_and_sign!(%{}, claims, signer(opts))
   end
