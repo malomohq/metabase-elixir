@@ -25,7 +25,7 @@ configuration options as the second argument.
       ...> |> Map.put(:body, username: "person@mymetabase.com", password: "fakepassword")
       ...> |> Map.put(:method, :post)
       ...> |> Map.put(:path, "/session")
-      ...> |> Metabase.send(host: "mymetabase.com/api")
+      ...> |> Metabase.send(host: "mymetabase.com/")
       {:ok, %Metabase.Response{}}
 
 ## Configuration
